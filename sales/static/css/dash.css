@@ -1,0 +1,33 @@
+
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap&effect=shadow-multiple|fire-animation|3d|3d-float');
+
+.container{
+    text-align: center;
+    text-shadow: 5cqb;
+    
+}
+.font-effect-fire-animation{
+    font-family: "Bebas Neue", serif ;
+    font-size: 36px;
+}
+.dash_btns {
+    text-decoration: none;
+    display: contents;
+    cursor: pointer;
+}   
+.dash_btns:hover {
+    background-color: #149418;
+    padding: 8px 12px;
+}
+.new-delivery,
+.ext-cust, 
+.new-cust{
+    color: #333131;
+    text-align: center;
+    padding: 10px;
+    background-color: #149418b7;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight:500;
+}

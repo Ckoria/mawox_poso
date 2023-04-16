@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title%}
+  MaWoX Home
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class= "pay_info">
+        <ul class="navbar-nav nav-pills mr-auto">
+            <li>Account#ID: {{acc_info.get('id')}}</li>
+            <li>Product: {{acc_info.get('type')}}</li>
+            <li>Remainder: {{acc_info.get('rem')}}</li>
+            <li>Delivered: {{acc_info.get('deliver')}}</li>
+            <li>Quantity: {{acc_info.get('qty')}}</li>
+        </ul>
+    </div>
+    <table class= "table-acc">
+        <thead>
+            <tr>
+                <td>#id</td>
+                <td>Transaction Type</td>
+                <td>Balance</td>
+                <td>Paid Amount</td>
+                <td>Actual Amount</td>
+                <td>Payment Status</td>
+                <td>Payment Date </td>
+                <td>Last Updated </td>
+                <td>User</td>
+                <td>Payment</td>
+            </tr>
+        </thead>
+        <tbody>
+        {%for x in results%}
+            <tr>
+                <td>{{x.get('id')}}</td>
+                <td>{{x.get("type")}}</td>
+                <td>R {{x.get("bal")}}.00</td>
+                <td>R {{x.get("amount")}}.00</td>
+                <td>R {{x.get("total")}}.00</td>
+                <td>{{x.get("status")}}</td>
+                <td>{{x.get("cDate")}}</td>
+                <td>{{x.get("uDate")}}</td>
+                <td>{{x.get("user")}}</td>
+                <td><input type="number" id="paid_amount" name="paid_amount" placeholder="Amount Paid"></td>
+            </tr>
+            {%endfor%}
+            <tr>
+                <td colspan="9">
+                    <a>
+                        Take Payment
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{%endblock%}

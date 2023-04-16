@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title%}
+  Login
+{% endblock %}
+
+{% block content%}
+<body class="text-center">
+  <div class="container">
+    <form method="POST" class= form-login style="color: white">
+          <div class="checkbox mb-3">
+            <h6>Need an account</h6>
+            <a class="btn btn-sm btn-secondary" href="{{url_for('main.register_page')}}">Sign Up</a>
+          </div>
+          {{form.csrf_token }}
+          {{form.username.label()}}
+          {{form.username(class= "form-control ", placeholder= "Username")}}
+          
+          {{form.pwd_1.label()}}
+          {{form.pwd_1(class= "form-control ", placeholder= "Password")}}
+          </br>
+          {{form.submit(class= "btn btn-lg btn-block btn-primary ")}}
+    </form>
+  </div>
+</body>
+{% endblock %}

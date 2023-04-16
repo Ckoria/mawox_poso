@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title%}
+  MaWoX Home
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <form action="/search_payments" method="POST" >
+        {{form.hidden_tag()}}
+        <div class="acc_info">
+            <ul class="navbar-nav nav-pills mr-auto">
+                <li>Customer #ID: {{cust_info.get('id')}}</li>
+                <li>Name: {{cust_info.get('fname')}}</li>
+                <li>Surname: {{cust_info.get('lname')}}</li>
+                <li>Cell No: {{cust_info.get('cNo')}}</li>
+                <li>Balance: R {{totals.get('bal')}}.00</li>
+                <li>Amount Paid: R {{totals.get('paid')}}.00</li>
+                <li>Total Amount: R {{totals.get('total')}}.00</li>
+            </ul>
+        </div>
+        <table class= "table-acc">
+            <thead>
+                <tr>
+                    <td>#id</td>
+                    <td>Type</td>
+                    <td>Qty</td>
+                    <td>Delivered</td>
+                    <td>Remainder</td>
+                    <td>Account Status</td>
+                    <td>Date Created</td>
+                    <td>Date Updated</td>
+                    <td>User</td>
+                    <td>To Deliver</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for x in results%}
+                    <tr>
+                        <td><a class="navbar-brand" href="/search_payments/{{x.get('id')}}">
+                            {{x.get('id')}}
+                        </a>
+                        </td>
+                        <td>{{x.get("type")}}</td>
+                        <td>{{x.get("qty")}}</td>
+                        <td>{{x.get("rem")}}</td>
+                        <td>{{x.get("tot")}}</td>
+                        <td>{{x.get("status")}}</td> 
+                        <td>{{x.get("cDate")}}</td>
+                        <td>{{x.get("uDate")}}</td>
+                        <td>{{x.get("user")}}</td>
+                        <td><input type="number" id="paid_amount" name="paid_amount" placeholder="Qty"></td>
+                    </tr>
+                {%endfor%}
+                <tr>
+                    <td colspan="9">
+                        <a class="navbar-brand">
+                            Deliver
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+{%endblock%}

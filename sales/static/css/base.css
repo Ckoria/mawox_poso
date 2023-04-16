@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap&effect=shadow-multiple|fire-animation|3d|3d-float');
+
+body {
+    background-color: rgb(0, 0, 0);
+    color: white
+ }
+
+ .nav-brand {
+   border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 2px 0px 2px rgb(0, 0, 0);
+ }
+
+.logo{
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 20%;
+}
+ #font-effect-3d{
+    font-family: "Bebas Neue", Serif;
+    text-align: center;
+    font-size: 72px;
+ }
+ #font-effect{
+    font-family: "Bebas Neue", Serif;
+    text-align: center;
+    font-size: 10px;
+ }
+
+.navbar-nav{
+   margin-top: auto;
+   margin-bottom: auto;
+}
+.nav-item,
+.datetime{
+    font-size: 10px;
+    text-align: center;
+    text-shadow: #000000;
+    text-overflow: inherit;
+    font-weight: bolder;
+    display: block;
+    padding: 0px 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#search_text {
+   width: auto;;
+   height: 30px;
+
+}
+.navbar{
+   font-size: 8px;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #e67411ee;
+    padding: 0 px 0px;
+    margin: auto;
+    display: flexbox;
+}

@@ -1,0 +1,63 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in table %}
+    <tr id="row-{{ row.id }}">
+      <td>{{ row.id }}</td>
+      <td>{{ row.name }}</td>
+      <td><button onclick="deleteRow({{ row.id }})">Delete</button></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function deleteRow(id) {
+  $.ajax({
+    url: "/delete_row/" + id,
+    type: "POST",
+    success: function(data) {
+      if (data.success) {
+        $("#row-" + id).remove();
+      } else {
+        alert("Error deleting row: " + data.error);
+      }
+    },
+    error: function(xhr, status, error) {
+      alert("AJAX error: " + error);
+    }
+  });
+}
+</script>
+
+
+if request.form["btn_remove"] == "REMOVE PRODUCTS":
+            added_products[:] = [item for item in added_products if item not in checked_items]
+            print(checked_items)
+
+
+checked_items = request.form.getlist("check")
+    #Catches exception if the remove button value is null/ 
+    try:
+        #Check if remove btn is press then remove all checked items
+        if request.form["btn_clear"] == "CLEAR PRODUCTS":
+            
+            print(f'CLEAR PRODUCTS {added_products}')
+    except:
+        
+  
+
+  
+            <tbody>
+                <td>{{info[1][0].get('id')}}</td>
+                <td>{{info[1][0].get('type')}}</td>
+                <td>{{info[1][0].get('qty')}}</td>
+                <td>{{info[1][0].get('rem')}}</td>
+            </tbody>

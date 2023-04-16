@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #f7f6f6;
+}
+
+#btn-tbl {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 2px 4px;
+    font-size: 8px;
+    font-weight: 200px;    
+}
+
+.remove_products {
+    background-color: #313030;
+    color: white;
+    text-align: center;
+}
+select {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 5px solid #111010;
+    width: 150px;
+    margin: auto;
+}
+select:focus {
+    outline: none;
+    border-color: #49a85e;
+    box-shadow: 0 0 5px #6bb8e6;
+}
+.mb-3{
+    text-align: center;
+}
+#nums{
+
+    padding: 1px 1px;
+}
+
+.add-button,
+.del-button,
+.btn_total,
+.create-button,
+.btn_bal,
+.calc-button {
+    border: none;
+    border-radius: 12px;
+    color: rgb(48, 47, 47);
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#btn-id{
+    border-radius: 0px;
+    color: rgb(48, 47, 47);
+    padding: 1px 2px;
+    text-align: center;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 200;
+    cursor: pointer;
+}
+.btn_total,
+.create-button{
+    background-color: #497ddf;
+}
+.del-button {
+    background-color: #d60c0c;
+}
+.add-button,
+.calc-button {
+    background-color: #49df6f;
+}
+.btn_bal{
+    background-color: #cf7d03;
+}
+.add-button:hover,
+.del-button:hover,
+.calc-button:hover,
+.create-button:hover {
+    background-color: #149418;
+    padding: 7px 11px;
+}
+.calc-btn-cell,
+.total-btn-cell,
+.create-btn-cell {
+    text-align: right;
+    background-color: #0e0e0f;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+.del-btn-cell {
+    text-align: left;
+}
+.del-btn-cell {
+    background-color: #0c0c0e;
+}
+.table-acc,
+.table-products,
+.table-customer{
+    color: aliceblue;
+    border-collapse: collapse;
+    font-size: 10;
+    min-width: 400px;
+    text-align: left;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 2px  rgb(103, 102, 102);
+    margin-left: auto;
+    margin-right: auto;
+}
+.table-acc thead tr,
+.table-products thead tr,
+.table-customer thead tr {
+    color: #0c0c0e;
+    font-weight: bold;
+}
+.table-acc thead tr,
+.table-products thead tr,
+.table-customer thead tr {
+    background-color: #cf7d03;
+}
+.table-acc td,
+.table-products th,
+.table-customer th{
+    padding: 8px 10px;
+}
+.table-acc tbody tr,
+.table-products tbody tr,
+.table-customer tbody tr{
+    border-bottom: 1px solid #3e3e3e;
+}
+.table-acc tbody tr:last-of-type,
+.table-products tbody tr:last-of-type,
+.table-customer tbody tr:last-of-type {
+    border-bottom: 0px;
+}
+.pay_info, 
+.acc_info {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #3e3e3e;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+}

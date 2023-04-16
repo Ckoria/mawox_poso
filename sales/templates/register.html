@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title%}
+  Registration
+{% endblock %}
+{% block content%}
+<body class="text-center">
+  <div class="container">
+    <form method="POST" class= form-register style="color: white">
+      
+      <div class="checkbox mb-3">
+        <h6>Already have account</h6>
+        <a class="btn btn-sm btn-secondary" href="{{url_for('main.login_page')}}">Sign in</a>
+      </div>
+      <h1 class="h3 mb-3 font-weight-normal">Create an Account</h1>
+      {{form.csrf_token}}
+      {{form.username.label()}}
+      {{form.username(class= "form-control ", placeholder= "Username")}}
+
+      {{form.email.label()}}
+      {{form.email(class= "form-control ", placeholder= "Email")}}
+
+      {{form.pwd_1.label()}}
+      {{form.pwd_1(class= "form-control ", placeholder= "Password")}}
+
+      {{form.passwords.label()}}
+      {{form.passwords(class= "form-control ", placeholder= "Verify Password")}}
+      </br>
+      {{form.submit(class= "btn btn-lg btn-block btn-primary ")}}
+    </form>
+  </div>
+</body>
+{% endblock %}

@@ -1,0 +1,80 @@
+f{% extends 'base.html' %}
+{% block title%}
+  MaWoX Home
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <form  method="POST" >
+        {{form.hidden_tag()}}
+        <table class= "table-acc">
+            <thead>
+                <tr>
+                    <td>#ID</td>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Contact No</td>
+                    <td>Alt. No</td>
+                    <td>Email</td>
+                    <td>Street Address</td>
+                    <td>Area</td>
+                    <td>Date Created</td>
+                    <td>Last Updated</td>
+                    <td>Created By</td>
+                </tr>
+            </thead>
+            <tbody>
+            {%for info in results%}
+                {%for i in range(info|length)%}
+                    {%if i == 0%}
+                        <tr>
+                            <td>
+                                <a value= {{info[i].get('id')}} href="/search_accounts/{{info[i].get('id')}}">
+                                    <button class="btn btn-outline-warning" id="nums">{{info[i].get('id')}}</button>
+                                </a>
+                            </td>
+                            <td>{{info[i].get('first_name')}}</td>
+                            <td>{{info[i].get('last_name')}}</td>
+                            <td>{{info[i].get('phone1')}}</td>
+                            <td>{{info[i].get('phone2')}}</td>
+                            <td>{{info[i].get('email')}}</td>
+                            <td>{{info[i].get('address1')}}</td>
+                            <td>{{info[i].get('address2')}}</td>
+                            <td>{{info[i].get('cDate')}}</td>
+                            <td>{{info[i].get('uDate')}}</td>
+                            <td>{{info[i].get('user')}}</td>
+                        </tr>
+                        <tr>
+                            <div class="btns-customer-details">
+                                <td colspan="7">
+                                    <a name= "btn_id" value={{info[i].get('id')}} href="/modify_customer/{{info[i].get('id')}}">
+                                        <button class="btn btn-outline-warning" id="btn-tbl">
+                                            Edit Customer
+                                        </button>
+                                    </a>
+                                </td>
+                                <td colspan="2">
+                                    <a name= "btn_id" value={{info[i].get('id')}} href="/account/{{info[i].get('id')}}">
+                                        <button type="button" class="btn btn-outline-primary" id="btn-tbl">
+                                            Add Account
+                                        </button>
+                                    </a>
+                                </td>
+                                <td colspan="2" style= "text-align: right;">
+                                    <a name= "btn_id" value={{info[i].get('id')}} href='#'>
+                                        <button type="button" class="btn btn-outline-success" id="btn-tbl">
+                                            Account Summary
+                                        </button>
+                                    </a>
+                                </td>
+                            </div>
+                        </tr>  
+                    {% endif %}
+                {%endfor%}
+            {%endfor%}
+            </tbody>
+        </table>
+    </form>
+</div> 
+{%endblock%}
+

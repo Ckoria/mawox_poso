@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title%}
+  MaWoX Sales
+{% endblock %}
+{% block content%}
+<div >
+  <table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Quote</th>
+            <th scope="col">Model</th>
+            <th scope="col">Issue Type</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Note Date</th>
+            <th scope="col">Note</th>
+            <th scope="col">Tel No</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for items_list in tickets_list%}
+          <tr>
+              <th scope="col"><a href="#">{{items_list.First_Name}}</a></th>
+              <th scope="col">{{items_list.Last_Name}}</th>
+              <th scope="col">{{items_list.Cell_No}}</th>
+              <th scope="col">{{items_list.Quote}}</th>
+              <th scope="col">{{items_list.Model}}</th>
+              <th scope="col">{{items_list.Issue_Type}}</th>
+              <th scope="col">{{items_list.Date_Created}}</th>
+              <th scope="col">{{items_list.Note_Date}}</th>
+              <th scope="col">
+                <details>
+                  <summary>{{' '.join(items_list.Note.split(' ')[:5])}}</summary>
+                    <p>
+                      {{items_list.Note}}
+                    </p>
+                  </details>
+              </th>
+              <th scope="col">{{items_list.Tel_No}}</th>
+              <th scope="col">{{items_list.Email}}</th>
+              <th scope="col">
+                <details>
+                  <summary>{{' '.join(items_list.Address.split(' ')[:3])}}</summary>
+                    <p>
+                      {{items_list.Note}}
+                    </p>
+                  </details>
+              </th>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+<style>
+  @font-face {
+
+         font-family: Vampire;
+         src:url(Cust_Vampire.ttf);
+         
+         font-family: GodOfWar;
+         src:url(Cust_GOW.ttf);
+
+         font-family: Gloss;
+         src:url(Cust_DA.otf);
+         
+     }
+    table {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        table-layout:fixed;
+    }
+      
+     .text-center{
+         font-family: Vampire;
+         color: green;
+    }
+     .text-center: hover {
+      display: block;
+      color: #997309;
+      text-size: 40px;
+  }
+   
+</style>
+{% endblock %}
