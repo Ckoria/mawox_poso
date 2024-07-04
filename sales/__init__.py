@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 #Own Modules
-from .exts import db, login_manager, bcrypt
+from .extensions import db, login_manager, bcrypt
 from .blueprints.dashboard import dash
 from .blueprints.accounts import account
 from .blueprints.customers import customers

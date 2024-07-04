@@ -7,7 +7,7 @@ import requests
 #Own Modules
 from .models.users import Users
 from sales.models.models import *
-from .exts import db
+from .extensions import db
 from .forms import Register_form, Login_form
 from .dash_data import *
 from .gsheet import switch_backlog_sheets

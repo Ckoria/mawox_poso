@@ -3,7 +3,7 @@
 from datetime import datetime
 from sqlalchemy.orm import backref
 #Own Modules
-from ..exts import db
+from ..extensions import db
 
 class Products(db.Model):
     #Creating a Database for items

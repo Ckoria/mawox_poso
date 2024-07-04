@@ -1,4 +1,4 @@
-from ..exts import db, login_manager, bcrypt
+from ..extensions import db, login_manager, bcrypt
 from sqlalchemy import create_engine, ForeignKey, String, Integer, Column, CHAR
 from flask_login import UserMixin
 

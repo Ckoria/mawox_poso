@@ -7,7 +7,7 @@ from flask import render_template, redirect, url_for, flash, request, Blueprint
 from sqlalchemy.exc import IntegrityError
 #Own Modules
 from ..process import *
-from ..exts import db
+from ..extensions import db
 from ..models.models import Customers_database
 from ..forms import Login_form
 

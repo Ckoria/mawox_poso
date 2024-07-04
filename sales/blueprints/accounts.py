@@ -7,7 +7,7 @@ import threading
 #Own Modules
 from ..models.models import Products, Payments_database, Customers_database
 from ..forms import  Login_form
-from ..exts import db
+from ..extensions import db
 from ..process import *
 from ..gsheet import *
 from ..dash_data import *
