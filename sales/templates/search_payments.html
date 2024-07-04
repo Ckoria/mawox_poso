@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title%}
+  Take Payment
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class="acc_info">
+        <table class="acc_info_tables">
+            <tbody>
+                <tr>
+                    <td>Account #ID:</td>
+                    <td>
+                        <a class="btn btn-warning" href="/search_accounts/{{ref_id}}">
+                            {{acc_info.get('id')}}
+                        </a>
+                    </td>
+                    <td style="text-align: right">Quantity:</td>
+                    <td style="text-align: right">{{acc_info.get('Quantity')}}</td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td>{{acc_info.get('Type')}}</td>
+                    <td style="text-align: right">Remainder:</td>
+                    <td style="text-align: right">{{acc_info.get('Remainder')}}</td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    <td>{{acc_info.get('Status')}}</td>
+                    <td style="text-align: right">Delivered:</td>
+                    <td style="text-align: right">{{acc_info.get('Delivered')}}</td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <table class= "table-acc">
+        <thead>
+            <tr>
+                <td style="text-align: left">#ID</td>
+                <td>Balance</td>
+                <td>Paid Amount</td>
+                <td>Actual Amount</td>
+                <td>Payment Status</td>
+                <td>Payment Date </td>
+                <td>User</td>
+                <td>Transaction Type</td>
+                <td>Payment</td>
+                <td>Take Payment</td>
+            </tr>
+        </thead>
+        <tbody>
+            <form action="/process/payments/{{acc_info.get('id')}}" method="POST" >
+                {{form.hidden_tag()}}
+                {%for i in range(payments|length)%}
+                <tr>
+                    <td style="text-align: left">
+                        <button type="button" class="btn btn-outline-dark">
+                            {{payments[i].get('id')}}
+                        </button>
+                    </td>
+                    <td>R {{payments[i].get("Balance")}}</td>
+                    <td>R {{payments[i].get("Paid")}}</td>
+                    <td>R {{payments[i].get("Amount")}}</td>
+                    <td>{{payments[i].get("Status")}}</td>
+                    {%if (payments[i].get("Balance") > 0) and i == 0%}
+                    <td>{{(payments[i].get("Date_Updated")|string)[0:10]}}</td>
+                    <td>{{payments[i].get("User")}}</td>
+                    <td>
+                        <select class="form-select" name="Transaction_Type" style="width: 75%;">
+                            <option value={{payments[i].get("Transaction_Type")}} selected disabled hidden>
+                                {{payments[i].get('Transaction_Type')}}
+                            </option>
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="EFT">EFT</option>
+                        </select>
+                    </td>
+                    <td  style="text-align: right;">
+                        <input type="number" id="paid_amount" name="Paid" placeholder="Amount Paid" value=0>
+                    </td>
+                    <td colspan="9" style="text-align : right">
+                        <input type="submit" name= "payBtn" class="btn btn-outline-success" value="Pay">
+                    </td>
+                    {%else%}
+                    <td>{{payments[i].get("Date_Created")}}</td>
+                    <td>{{payments[i].get("User")}}</td>
+                    <td colspan="2" style="text-align: center;">{{payments[i].get('Transaction_Type')}}</td>
+                    <td colspan="2" style="text-align: right;">Paid</td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+            </form>
+        </tbody>
+    </table>
+</div>
+{%endblock%}

@@ -1,0 +1,208 @@
+<<<<<<< HEAD
+/*----- Grid for Main Content -----*/
+.dash-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-structure {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 0.2fr 1fr 1fr;
+    grid-auto-rows: minmax(200px, auto);
+    gap: 10px;
+    grid-template-areas: 
+    "boxes boxes boxes"
+    "charts charts charts"
+    "chart chart chart";
+    
+}
+
+.box-container{
+    grid-area: boxes;
+    gap: 10px;
+}
+.chart-container {
+    grid-area: charts;
+    gap: 10px;
+}
+
+.box-container, .chart-container {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.chart-container {    
+    flex-direction: column;
+}
+
+/*--------------- BOX LAYOUT -----------------*/
+.box {
+    border: 1px;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 10px 5px;
+    width: 18.8vw;
+    height: 120px;
+    padding: 5px 2px;
+    text-align: center;
+    box-shadow: -4px 4px 0px rgba(255, 255, 255, 0.5);
+    transition: all 1s ease-in-out;
+}
+.box-container a {
+    text-decoration: none;
+    border-bottom: 2px solid white;
+}
+
+.box-container button {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.box:hover {
+    box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+.box:nth-child(1) {
+    background-color: rgb(52, 46, 104);
+}
+.box:nth-child(2) {
+    background-color: rgb(119, 210, 77);
+}
+.box:nth-child(3) {
+    background-color: chocolate;
+}
+.box:nth-child(4) {
+    background-color: rgb(144, 55, 55);
+}
+
+#schedule_date {
+    position: relative;
+    background-color: chocolate;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid white;
+    padding: 0px 0px 0px 0px;
+    font-size: 10px;
+}
+/*--------------- CHARTS LAYOUT -----------------*/
+.chart {
+    border: 1px;
+    margin: 10px 5px;
+    color: aliceblue;
+    width: 80vw;
+    height: 500px;
+    box-shadow: -2px 2px 0px rgba(255, 255, 255, 0.5);
+    padding: 10px 10px;
+
+}
+.chart:nth-child(1) {
+    box-shadow: -2px 2px 0px rgba(255, 255, 255, 0.5);
+}
+.chart:nth-child(2) {
+    box-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+=======
+/*----- Grid for Main Content -----*/
+.dash-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-structure {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 0.2fr 1fr 1fr;
+    grid-auto-rows: minmax(200px, auto);
+    gap: 10px;
+    grid-template-areas: 
+    "boxes boxes boxes"
+    "charts charts charts"
+    "chart chart chart";
+    
+}
+
+.box-container{
+    grid-area: boxes;
+    gap: 10px;
+}
+.chart-container {
+    grid-area: charts;
+    gap: 10px;
+}
+
+.box-container, .chart-container {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.chart-container {    
+    flex-direction: column;
+}
+
+/*--------------- BOX LAYOUT -----------------*/
+.box {
+    border: 1px;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 10px 5px;
+    width: 18.8vw;
+    height: 120px;
+    padding: 5px 2px;
+    text-align: center;
+    box-shadow: -4px 4px 0px rgba(255, 255, 255, 0.5);
+    transition: all 1s ease-in-out;
+}
+.box-container a {
+    text-decoration: none;
+    border-bottom: 2px solid white;
+}
+
+.box-container button {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.box:hover {
+    box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+.box:nth-child(1) {
+    background-color: rgb(52, 46, 104);
+}
+.box:nth-child(2) {
+    background-color: rgb(119, 210, 77);
+}
+.box:nth-child(3) {
+    background-color: chocolate;
+}
+.box:nth-child(4) {
+    background-color: rgb(144, 55, 55);
+}
+
+#schedule_date {
+    position: relative;
+    background-color: chocolate;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid white;
+    padding: 0px 0px 0px 0px;
+    font-size: 10px;
+}
+/*--------------- CHARTS LAYOUT -----------------*/
+.chart {
+    border: 1px;
+    margin: 10px 5px;
+    color: aliceblue;
+    width: 80vw;
+    height: 500px;
+    box-shadow: -2px 2px 0px rgba(255, 255, 255, 0.5);
+    padding: 10px 10px;
+
+}
+.chart:nth-child(1) {
+    box-shadow: -2px 2px 0px rgba(255, 255, 255, 0.5);
+}
+.chart:nth-child(2) {
+    box-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+>>>>>>> refs/remotes/origin/master
+}

@@ -1,22 +1,7 @@
-body {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    line-height: 1.5;
-    color: #f7f6f6;
-}
+<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap&effect=shadow-multiple|fire-animation|3d|3d-float');
 
-#btn-tbl {
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    padding: 2px 4px;
-    font-size: 8px;
-    font-weight: 200px;    
-}
-
-.remove_products {
-    background-color: #313030;
-    color: white;
-    text-align: center;
-}
+/* Dropdown item selector Styling */
 select {
     padding: 5px;
     font-size: 16px;
@@ -38,26 +23,28 @@ select:focus {
     padding: 1px 1px;
 }
 
-.add-button,
-.del-button,
-.btn_total,
-.create-button,
-.btn_bal,
-.calc-button {
-    border: none;
-    border-radius: 12px;
-    color: rgb(48, 47, 47);
-    padding: 5px 10px;
+/*-------------------------------- Buttons Styling ------------------------*/
+.btn-outline-dark {
+    padding: 1px 2px;
+    margin: 5px 2px;
+}
+#btn-tbl {
+    padding: 2px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px 2px;    
+}
+.remove_products {
+    background-color: #313030;
+    color: rgb(22, 21, 21);
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
+}
+btn {
+    color: #0c0c0e;
 }
 #btn-id{
     border-radius: 0px;
-    color: rgb(48, 47, 47);
+    color: rgb(15, 15, 15);
     padding: 1px 2px;
     text-align: center;
     display: inline-block;
@@ -65,87 +52,637 @@ select:focus {
     font-weight: 200;
     cursor: pointer;
 }
-.btn_total,
-.create-button{
-    background-color: #497ddf;
-}
-.del-button {
-    background-color: #d60c0c;
-}
-.add-button,
-.calc-button {
-    background-color: #49df6f;
-}
-.btn_bal{
-    background-color: #cf7d03;
-}
-.add-button:hover,
-.del-button:hover,
-.calc-button:hover,
-.create-button:hover {
-    background-color: #149418;
-    padding: 7px 11px;
-}
-.calc-btn-cell,
-.total-btn-cell,
-.create-btn-cell {
+
+.del-btn-cell, .calc-btn-cell,
+.total-btn-cell, .create-btn-cell {
     text-align: right;
-    background-color: #0e0e0f;
-    font-family:'Courier New', Courier, monospace;
+    background-color: rgb(10, 10, 9,0.3);
     font-weight: bolder;
+    color: #0c0c0e;
 }
+.post-btn,
 .del-btn-cell {
     text-align: left;
 }
-.del-btn-cell {
-    background-color: #0c0c0e;
+.fa-solid +.fa-truck-fast {
+    color: #cf7d03;
+
 }
+.fa-solid {
+    color: rgb(10, 9, 9) transparent;
+}
+
+/*---------------------------------- Tables Styling --------------------------------------*/
+
+.acc_info_tables,
 .table-acc,
 .table-products,
 .table-customer{
-    color: aliceblue;
+    color: #c0b9b9;
     border-collapse: collapse;
-    font-size: 10;
-    min-width: 400px;
+    font-weight: 700;
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    min-width: 500px;
     text-align: left;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
-    box-shadow: 2px  rgb(103, 102, 102);
+    width: 75vw;
     margin-left: auto;
     margin-right: auto;
+    transition: all 1s ease-in-out;
+    
+
 }
+
 .table-acc thead tr,
 .table-products thead tr,
 .table-customer thead tr {
     color: #0c0c0e;
     font-weight: bold;
-}
-.table-acc thead tr,
-.table-products thead tr,
-.table-customer thead tr {
+    font-size: 20px;
+    padding: 5px 10px;
     background-color: #cf7d03;
+    text-align: right;
+
 }
+
+.acc_info_tables td,
 .table-acc td,
 .table-products th,
-.table-customer th{
-    padding: 8px 10px;
+.table-customer th {
+    padding: 2px 3px;
+    font-size: 10px;
+    list-style: none;
+    cursor: pointer;
+    margin-top: 3px;
+    text-align: right;
 }
+
+.acc_info_tables tbody tr,
+.table-acc tbody tr,
 .table-acc tbody tr,
 .table-products tbody tr,
 .table-customer tbody tr{
     border-bottom: 1px solid #3e3e3e;
+    
 }
+
+.acc_info_tables tr:last-of-type,
 .table-acc tbody tr:last-of-type,
 .table-products tbody tr:last-of-type,
 .table-customer tbody tr:last-of-type {
     border-bottom: 0px;
 }
-.pay_info, 
-.acc_info {
+.acc_info_tables tbody tr:hover,
+.table-acc tbody tr:hover,
+.table-acc tbody tr:hover,
+.table-products tbody tr:hover,
+.table-customer tbody tr:hover,
+.table-acc tbody tr:hover{
+    background-color: #60676e;
+}
+
+/*--------------------------------------- Accordian Styling ---------------------------------*/
+.xpand input[type="radio"] {
+    display: none;
+}
+
+.xpand span {
+    font-size: 18px;
+    color: #149418;
+
+
+}
+
+#toggle-xpense-form {
     margin-left: auto;
     margin-right: auto;
-    background-color: #3e3e3e;
-    font-family: 'Courier New', Courier, monospace;
+    padding: 1px 2px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sub-rows{
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.98s ease;
+}
+
+/*---------------- PRIVATE NOTES ------------------------------*/
+
+.note {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+
+}
+ .note > ul li label {
+    margin-top: 20px;
+ }
+
+.private-note {
+    background-color: rgb(196, 189, 182);
+    outline: none;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border-collapse: collapse;
+    font-size: 16px;
+    width: 750px;
+    text-align: left;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 2px  rgb(103, 102, 102); 
+    transition: all 0.5s;
+}
+
+.private-note:hover{
+    cursor: pointer;
+    background-color: whitesmoke;
+  }
+
+.added-notes {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #cccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: dimgray;
     font-size: 14px;
+    width: 400px;
+    font-weight: 500px;
+    box-shadow: 2px 6px -7px rgb(103, 102, 102); 
+    text-align: left;
+}
+
+/*--------------- EXPENSES FORM --------------*/
+#expenses-container {
+    display: none;
+}
+#show-box {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.xpenses-form {
+    position:relative;
+    display: flex;
+    justify-items: center;
+    justify-content:space-evenly;
+    align-items: center;
+    box-shadow: 1px 1px 1px #424040;
+    border: solid #18191c;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 10px;
+    margin-bottom: 10px ;
+    transition: all 1s ease-in-out;
+
+
+}
+
+.xpenses-form h2{
+    text-align: center;
+    font-size: 22px;
     font-weight: bold;
+    font-family: "Bebas Neue", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 10px;
+
+}
+.expenses-category select,
+.expenses-type select{
+    width: 100%;
+}
+
+.form-control{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 80%;
+    padding: 5px 10px;
+}
+
+.expenses-transaction select{
+    width: 50%;
+}
+#input-qty {
+    width: 20%;
+
+}
+
+
+/*--- DATE FILTERS ----*/
+.date-filters .col{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    margin-left: 4vw;
+}
+.adds-products .col {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    justify-content: space-between;
+    max-width: 45vw;
+    margin-left: 20vw;
+}
+.filter-input span, .acc-input span {
+    border-radius: 0px;
+    border: none;
+    height: 98%;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.2);
+    font-weight: bolder;
+
+}
+.prod-input select, .acc-input select {
+    height: 100%;
+    width: 200px;
+}
+.prod-input input.prod-input input {
+    width: 250px !important;
+}
+.prod-input select, .prod-input input {
+    border-radius: 0px;
+    border: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bolder;
+
+}
+
+.filter-input input{
+    font-weight: bolder;
+    border-radius: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.filter-btn, .prod-input button {
+    background-color: #e4aa2d;
+    color: #313030;
+    max-width: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    font-weight: bolder;
+
+}
+
+.prod-input button:hover, .filter-btn:hover {
+    background-color: silver;
+=======
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap&effect=shadow-multiple|fire-animation|3d|3d-float');
+
+/* Dropdown item selector Styling */
+select {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 5px solid #111010;
+    width: 150px;
+    margin: auto;
+}
+select:focus {
+    outline: none;
+    border-color: #49a85e;
+    box-shadow: 0 0 5px #6bb8e6;
+}
+.mb-3{
+    text-align: center;
+}
+#nums{
+
+    padding: 1px 1px;
+}
+
+/*-------------------------------- Buttons Styling ------------------------*/
+.btn-outline-dark {
+    padding: 1px 2px;
+    margin: 5px 2px;
+}
+#btn-tbl {
+    padding: 2px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px 2px;    
+}
+.remove_products {
+    background-color: #313030;
+    color: rgb(22, 21, 21);
+    text-align: center;
+}
+btn {
+    color: #0c0c0e;
+}
+#btn-id{
+    border-radius: 0px;
+    color: rgb(15, 15, 15);
+    padding: 1px 2px;
+    text-align: center;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+.del-btn-cell, .calc-btn-cell,
+.total-btn-cell, .create-btn-cell {
+    text-align: right;
+    background-color: rgb(10, 10, 9,0.3);
+    font-weight: bolder;
+    color: #0c0c0e;
+}
+.post-btn,
+.del-btn-cell {
+    text-align: left;
+}
+.fa-solid +.fa-truck-fast {
+    color: #cf7d03;
+
+}
+.fa-solid {
+    color: rgb(10, 9, 9) transparent;
+}
+
+/*---------------------------------- Tables Styling --------------------------------------*/
+
+.acc_info_tables,
+.table-acc,
+.table-products,
+.table-customer{
+    color: #c0b9b9;
+    border-collapse: collapse;
+    font-weight: 700;
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    min-width: 500px;
+    text-align: left;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    width: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 1s ease-in-out;
+    
+
+}
+
+.table-acc thead tr,
+.table-products thead tr,
+.table-customer thead tr {
+    color: #0c0c0e;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 10px;
+    background-color: #cf7d03;
+    text-align: right;
+
+}
+
+.acc_info_tables td,
+.table-acc td,
+.table-products th,
+.table-customer th {
+    padding: 2px 3px;
+    font-size: 10px;
+    list-style: none;
+    cursor: pointer;
+    margin-top: 3px;
+    text-align: right;
+}
+
+.acc_info_tables tbody tr,
+.table-acc tbody tr,
+.table-acc tbody tr,
+.table-products tbody tr,
+.table-customer tbody tr{
+    border-bottom: 1px solid #3e3e3e;
+    
+}
+
+.acc_info_tables tr:last-of-type,
+.table-acc tbody tr:last-of-type,
+.table-products tbody tr:last-of-type,
+.table-customer tbody tr:last-of-type {
+    border-bottom: 0px;
+}
+.acc_info_tables tbody tr:hover,
+.table-acc tbody tr:hover,
+.table-acc tbody tr:hover,
+.table-products tbody tr:hover,
+.table-customer tbody tr:hover,
+.table-acc tbody tr:hover{
+    background-color: #60676e;
+}
+
+/*--------------------------------------- Accordian Styling ---------------------------------*/
+.xpand input[type="radio"] {
+    display: none;
+}
+
+.xpand span {
+    font-size: 18px;
+    color: #149418;
+
+
+}
+
+#toggle-xpense-form {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px 2px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sub-rows{
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.98s ease;
+}
+
+/*---------------- PRIVATE NOTES ------------------------------*/
+
+.note {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+
+}
+ .note > ul li label {
+    margin-top: 20px;
+ }
+
+.private-note {
+    background-color: rgb(196, 189, 182);
+    outline: none;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border-collapse: collapse;
+    font-size: 16px;
+    width: 750px;
+    text-align: left;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 2px  rgb(103, 102, 102); 
+    transition: all 0.5s;
+}
+
+.private-note:hover{
+    cursor: pointer;
+    background-color: whitesmoke;
+  }
+
+.added-notes {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #cccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: dimgray;
+    font-size: 14px;
+    width: 400px;
+    font-weight: 500px;
+    box-shadow: 2px 6px -7px rgb(103, 102, 102); 
+    text-align: left;
+}
+
+/*--------------- EXPENSES FORM --------------*/
+#expenses-container {
+    display: none;
+}
+#show-box {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.xpenses-form {
+    position:relative;
+    display: flex;
+    justify-items: center;
+    justify-content:space-evenly;
+    align-items: center;
+    box-shadow: 1px 1px 1px #424040;
+    border: solid #18191c;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 10px;
+    margin-bottom: 10px ;
+    transition: all 1s ease-in-out;
+
+
+}
+
+.xpenses-form h2{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "Bebas Neue", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 10px;
+
+}
+.expenses-category select,
+.expenses-type select{
+    width: 100%;
+}
+
+.form-control{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 80%;
+    padding: 5px 10px;
+}
+
+.expenses-transaction select{
+    width: 50%;
+}
+#input-qty {
+    width: 20%;
+
+}
+
+
+/*--- DATE FILTERS ----*/
+.date-filters .col{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    margin-left: 4vw;
+}
+.adds-products .col {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    justify-content: space-between;
+    max-width: 45vw;
+    margin-left: 20vw;
+}
+.filter-input span, .acc-input span {
+    border-radius: 0px;
+    border: none;
+    height: 98%;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.2);
+    font-weight: bolder;
+
+}
+.prod-input select, .acc-input select {
+    height: 100%;
+    width: 200px;
+}
+.prod-input input.prod-input input {
+    width: 250px !important;
+}
+.prod-input select, .prod-input input {
+    border-radius: 0px;
+    border: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bolder;
+
+}
+
+.filter-input input{
+    font-weight: bolder;
+    border-radius: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.filter-btn, .prod-input button {
+    background-color: #e4aa2d;
+    color: #313030;
+    max-width: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    font-weight: bolder;
+
+}
+
+.prod-input button:hover, .filter-btn:hover {
+    background-color: silver;
+>>>>>>> refs/remotes/origin/master
 }

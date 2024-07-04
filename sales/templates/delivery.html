@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title%}
+    Delivery
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class="acc_info">
+        <table class="acc_info_tables">
+            <tbody>
+                <tr>
+                    <td>Product #ID:</td>
+                    <td>
+                        <a class="btn btn-warning" href="/search_accounts/{{acc_info.get('Customers_id')}}">
+                            {{acc_info.get('Customers_id')}}
+                        </a>
+                    </td>
+                    <td style="text-align: right">Quantity:</td>
+                    <td style="text-align: right">{{acc_info.get('Quantity')}}</td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td>{{acc_info.get('Type')}}</td>
+                    <td style="text-align: right">Remainder:</td>
+                    <td style="text-align: right">{{acc_info.get('Remainder')}} </td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    {%if acc_info.get('Remainder') == 0%}
+                        <td>Closed</td>
+                    {%else%}
+                        <td>Active</td>
+                    {%endif%}
+                    <td style="text-align: right">Delivered:</td>
+                    <td style="text-align: right">{{acc_info.get('Delivered')}} </td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class= "delivery">
+        <table class= "table-acc">
+            <thead>
+                <tr>
+                    <td style="text-align: left">#ID</td>
+                    <td>Remainder</td>
+                    <td>Delivered</td>
+                    <td>Next Delivery</td>
+                    <td>Driver's Name</td>
+                    <td>Date Created</td>
+                    <td style="text-align: right;">User</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for delivery in delivery_info%}
+                    <tr>
+                        <td style="text-align: left">
+                            <button class="btn btn-outline-dark">
+                                {{delivery.get('id')}}
+                            </button>
+                        </td>
+                        <td>{{delivery.get("Remainder")}}</td>
+                        <td>{{delivery.get("Delivered")}}</td>
+                        <td>{{(delivery.get("Delivery_Schedule")|string)[0:10]}}</td>
+                        <td>{{delivery.get("Drivers_Name")}}</td>
+                        <td>{{(delivery.get("Date_Created")|string)[0:10]}}</td>
+                        <td style="text-align: right;">{{delivery.get("User")}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

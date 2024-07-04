@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title%}
+  Expenses
+{% endblock %}
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<body>
+    <div class= "container">
+        <div class="expenses-table">
+          <div id="expenses-container">
+            <!------------ FORM FOR EXPENSES ---------->
+            <div class="xpenses-form">
+              <form action="/expenses/expense" method="POST">
+                {{form.hidden_tag()}}
+                <h2>Expenses Form</h2>
+                <div class="expenses-type">
+                  <div class="expenses-source">
+                    <select name="Source" class="form-select" aria-label="Default select example" required>
+                      <option selected>Source for Payment</option>
+                      <option value="Blocks">Blocks</option>
+                      <option value="Cement">Cement</option>
+                      <option value="Sand">Sand</option>
+                      <option value="Lintels">Lintels</option>
+                      <option value="Delivery">Delivery</option>
+                    </select>
+                  </div>
+                  <div class="expenses-category">
+                    <select name="Category" class="form-select" aria-label="Default select example" required>
+                      <option selected>Expenses Category</option>
+                      <option value="Cement Production">Cement Production</option>
+                      <option value="Cement Sales">Cement Sales</option>
+                      <option value="Sand Sales">Sand Sales</option>
+                      <option value="and Production">Sand Production</option>
+                      <option value="Desiel">Desiel</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="date" name="Date_Added" class="form-control" placeholder="yy/mm/dd" aria-label="Amount (to the nearest rand)">
+                  <input type="text" name="Paid" class="form-control" required placeholder="R" aria-label="Amount (to the nearest rand)">
+                </div>
+                <div class="input-group mb-3">
+                  <textarea name="Description" class="form-control" required placeholder="Expense Description" aria-label="With textarea"></textarea>
+                </div>
+                <div class="expenses-payment">
+                  <div class="expenses-transaction">
+                    <select name="Transaction" class="form-select" aria-label="Default select example" required>
+                      <option selected>Transaction Type</option>
+                      <option value="Cash">Cash</option>
+                      <option value="Card">Card</option>
+                      <option value="EFT">EFT</option>
+                    </select>
+                    <input type="number" name="Quantity" class="form-control" required placeholder="Qty" id="input-qty">
+                    <input type="submit" name="add" class="btn btn-outline-success" value="Save" >
+                    <input type="submit" id= "close-box" onClick = "closeBox()" class="btn btn-outline-warning" value="Close" >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!--    ADD EXPENSES BUTTON     -->
+            <tr>
+              <td colspan='10'>
+                <input type="submit"  id="toggle-xpense-form" onClick= "showBox()"
+                class="btn btn-outline-warning" value="Add Expense" >
+              </td>
+            </tr>
+            <!--        TABLE FOR ALL EXPENSES        -->
+            <table id="xpenses-table" class= "table-acc">
+            <thead>
+                <tr>
+                    <td style="text-align: left">#ID</td>
+                    <td>Category</td>
+                    <td>Description</td>
+                    <td>Transaction Type</td>
+                    <td>Paid Amount</td>
+                    <td>Quantity</td>
+                    <td>Source</td>
+                    <td>Date Added</td>
+                    <td>Date Created</td>
+                    <td>User</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for xpense in expenses%}
+                    <tr>
+                        <td style="text-align: left">
+                            <button class="btn btn-outline-dark">
+                                {{xpense.get('id')}}
+                            </button>
+                        </td>
+                        <td>{{xpense.get("Category").title()}}</td>
+                        <td><summary>{{xpense.get("Description")}}</summary></td>
+                        <td>{{xpense.get("Transaction")}}</td>
+                        <td>{{xpense.get("Paid")}}</td>
+                        <td>{{xpense.get("Quantity")}}</td>
+                        <td>{{xpense.get("Source")}}</td>
+                        <td>{{xpense.get("Date_Added")}}</td>
+                        <td>{{xpense.get("Date_Created")}}</td>
+                        <td>{{xpense.get("User")}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/search.js') }}"></script>
+</body>
+{% endblock %}

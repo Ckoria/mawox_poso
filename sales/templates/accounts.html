@@ -1,155 +1,186 @@
 {% extends 'base.html' %}
 {% block title%}
-  MaWoX Home
+  {{customer_details.get('First_Name').title()+" "+customer_details.get('Last_Name', ' ').title()}}
 {% endblock %}
 {% block content%}
   <link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
   <body>
-    <div class= "container">  
-      <div  mb-3>
-        <form action="/accounts/{{customer_details.get('id')}}" method="POST">
-          {{log_form.csrf_token}}   
-          <table class="table-customer table-hover">
-            <thead>
-              <tr>
-                <th><label >Mzomunye Road</label></th>
-                <th><label >KwaXimba Area</label></th>
-                <th><label >Cato Ridge</label></th>
-                <th><label >071 061 0580</label></th>
-                <th><label ><a>info@mawox.co.za</a></label></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Customer #ID:</th>
-                <th>
-                  <a class="navbar-brand" value={{customer_details.get('id')}} href="/search_accounts/{{customer_details.get('id')}}">
-                    <button class="btn btn-warning" id="nums">
-                      {{customer_details.get('id')}}
-                    </button>
-                  </a>
-                </th>
-                <th>Creacted By:</th>
-                <th>{{customer_details.get('user')}}</th>
-              </tr>
-              <tr>
-                <th>Name:</th>
-                <th>{{customer_details.get('fname')}}</th>
-                <th>Surname:</th>
-                <th>{{customer_details.get('lname')}}</th>
-              </tr>
-              <tr>
-                <th>Cell No:</th>
-                <th>{{customer_details.get('cNo')}}</th>
-                <th>Alt No:</th>
-                <th>{{customer_details.get('tel')}}</th>
-              </tr>
-              <tr>
-                <th>Email:</th>
-                <th>{{customer_details.get('email')}}</th>
-                <th>Street Name:</th>
-                <th>{{customer_details.get('stAddress')}}</th>
-              </tr>
-              <tr>
-                <th>Area:</th>
-                <th>{{customer_details.get('area')}}</th>
-                <th>City:</th>
-                <th>{{customer_details.get('city')}}</th>
-              </tr>
-              <tr>
-                <th colspan="3">
-                  <select class="form-select" name="payment_type">
-                    <option value="Cash">Cash</option>
-                    <option value="Card">Card</option>
-                    <option value="EFT">EFT</option>
-                  </select>
-                </th>
-                <th class="create-btn-cell" name="create-btn-cell" colspan="4">
-                  <button type="submit" class="create-button" name="btn_create">Create Account</button>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div> 
-      <div  class="mb-3">
-        <form action="/products/{{customer_details.get('id')}}" method="POST">
-          {{log_form.csrf_token}}
-          <select class="form-select" name="select_product">
-            {%for product in all_products%}
-              <option value="{{product}}">{{product}}</option>
-            {%endfor%} 
-          </select>
-          <input type="text" class="item_no" name="item_no" placeholder="Number of items.">
-          <button class="add-button" name="btn_add" value="+">+</button>
-        </form>
-      </div>
-      <div  class="mb-3">
-        <form action="/remove/{{customer_details.get('id')}}" method="POST">
-          {{log_form.csrf_token}}
-          <table class="table-products table-hover table-dark">
-            <thead>
-              <tr>
-                <th scope="col">Product#ID</th>
-                <th scope="col">Products Desc</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Unit Price</th>
-                <th scope="col">Discount</th>
-                <th scope="col">Total Price</th>
-                <th scope="col">Paid Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {%for i in range((added_products|length)-1)%}
+  <!-- CONTAINER FOR CUSTOMER DETAILS TABLE -->
+    <div class= "container">
+      <form action="/accounts/{{customer_details.get('Ref_id')}}" method="POST">
+        {{log_form.csrf_token}}
+        <table class="table-customer table-hover">
+          <thead>
+            <tr>
+              <th><label >Mzomunye Road</label></th>
+              <th><label >KwaXimba Area</label></th>
+              <th><label >Cato Ridge</label></th>
+              <th><label >071 061 0580</label></th>
+              <th><label ><a>info@mawox.co.za</a></label></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Customer #ID:</th>
+              <th title="Go to Accounts">
+                <a class="btn btn-warning" value={{customer_details.get('Ref_id')}}
+                    href="/search_accounts/{{customer_details.get('Ref_id')}}">
+                    {{customer_details.get('Ref_id').upper()}}
+                </a>
+              </th>
+              <th>Creacted By:</th>
+              <th>{{customer_details.get('User')}}</th>
+            </tr>
+            <tr>
+              <th>Name:</th>
+              <th>{{customer_details.get('First_Name').title()}}</th>
+              <th>Surname:</th>
+              <th>{{customer_details.get('Last_Name', ' ').title()}}</th>
+            </tr>
+            <tr>
+              <th>Cell No:</th>
+              <th>{{customer_details.get('Contact_No')}}</th>
+              <th>Alt No:</th>
+              <th>{{customer_details.get('Tel_No')}}</th>
+            </tr>
+            <tr>
+              <th>Email:</th>
+              <th>{{customer_details.get('Email_Address')}}</th>
+              <th>Street Name:</th>
+              <th>{{customer_details.get('Street_Address').title()}}</th>
+            </tr>
+            <tr>
+              <th>Area:</th>
+              <th>{{customer_details.get('Area').title()}}</th>
+              <th>City:</th>
+              <th>{{customer_details.get('City')}}</th>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div class="row adds-products" >
+          <div class="col">
+            <div class="input-group mb-3 prod-input">
+              <select class="form-select form-select-lg" name="Transaction_Type">
+                <option value="Transaction Type" selected disabled hidden>
+                  Transaction Type
+                </option>
+                <option value="Cash">CASH</option>
+                <option value="Card">CARD</option>
+                <option value="EFT">EFT</option>
+              </select>
+              <input type="date" name="Delivery_Schedule" class="form-control" placeholder={{today}} required/>
+              <button type="submit" class="btn btn-success" name="btn_create" title="Create New Account">
+                <i class="bi bi-person-fill-add"></i>CREATE
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- CONTAINER FOR FOR ADDING PRODUCTS TO A CART-->
+    <div class="container">
+      <form action="/products/{{customer_details.get('Ref_id')}}" method="POST">
+        {{log_form.csrf_token}}
+        <div class="row adds-products" >
+          <div class="col">
+            <div class="input-group mb-3 prod-input">
+                <select class="form-select form-select-lg" name="select_product">
+                  {%for product in all_products%}
+                    <option value="{{product}}">
+                      {{product}}
+                    </option>
+                  {%endfor%}
+                </select>
+                <input type="number" class="form-control" name="item_no" required>
+                <button type="submit" class="btn btn-success" name="btn-add" title="Add Selected Item">
+                  <i class="bi bi-window-plus"></i>ADD
+                </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div  class="container">
+      <form action="/remove/{{customer_details.get('Ref_id')}}" method="POST">
+        {{log_form.csrf_token}}
+        <table class="table-products table-hover table-dark" >
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: left">Product#ID</th>
+              <th scope="col">Products Desc</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col" style="text-align: right;">Discount</th>
+              <th scope="col" style="text-align: right;">Total Price</th>
+              <th scope="col" style="text-align: right;">Paid Amount</th>
+            </tr>
+          </thead>
+          <tbody style="color: #000000;">
+            {%for i in range((added_products|length)-1)%}
               <tr name="items_purchased" >
-                <th class= "productID" scope="col">
+                <th class= "productID" scope="col" style="text-align: left">
                   <input class="form-check-input" type="checkbox" name="checked" value={{added_products[i][1]}}>
-                  <label class="product#ID" name="product#ID">{{(added_products[i][0])}}</label>
+                  <label class="product#ID" name="product#ID">
+                    {{(added_products[i][0])}}
+                  </label>
                 </th>
                 <th scope="col">
                   <label for="product_desc" name="product_desc">{{(added_products[i][1])}}</label>
                 </th>
                 <th scope="col">
-                  <label for="qty" name="qty">{{added_products[i][2]}}</label></br>
+                  <label for="qty" name="qty">{{added_products[i][2]}}</label>
                 </th>
                 <th scope="col">
                   <label for="unit_price" name="unit_price">
                     {{"R "~(added_products[i][3])|string}}
                   </label>
-                </br>
                 </th>
-                <th scope="col">
-                  <input type="number" id="disc_value" name="disc_value" placeholder="Discount">
+                <th scope="col" style="text-align: right;">
+                  <input type="number" id="disc_value" name="disc_value" placeholder="Discount" >
                 </th>
-                <th scope="col">
-                  <label for="product_total" name="product_total">
+                <th scope="col" style="text-align: right;">
+                  <label for="product_total" name="product_total" >
                     {{"R "~(added_products[i][-1])|string}}
-                  </label></br>
+                  </label>
                 </th>
-                <th scope="col">
-                  <input type="number" id="paid_amount" name="paid_amount" placeholder={{"R "~(added_products[i][-2]|string)}}>
+                <th scope="col"  style="text-align: right;">
+                  <input type="number" id="paid_amount" name="paid_amount"  value= {{paid_amount[i]}}>
                 </th>
               </tr>
-              {%endfor%}
-              <th class= "del-btn-cell" colspan="4">
-                <button class="del-button" name="btn_del"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            {%endfor%}
+            <tr></tr>
+            <div class="btn-group">
+              <th class= "del-btn-cell" style= "text-align:left" colspan="4">
+                <button class="btn btn-danger" name="btn_del" title="Remove Item/s">
+                  <i class="bi bi-backspace-reverse"></i>
+                </button>
               </th>
               <th class="total-btn-cell" colspan="1">
-                <label class="btn_bal" name="btn_bal">{{"Balance: R "~added_products[-1][0]|string}}</label>
+                <label class="btn btn-warning" name="btn_bal">
+                  {{"BALANCE: R "~added_products[-1][0]|string}}
+                </label>
               </th>
               <th class="total-btn-cell" colspan="1">
-                <label class="btn_total" name="btn_total">{{"Total Amount: R "~(added_products[-1][-1])|string}}</label>
+                <label class="btn btn-primary" name="btn_total">
+                  {{"TOTAL AMOUNT: R "~(added_products[-1][-1])|string}}
+                </label>
               </th>
-              <th class="calc-btn-cell" colspan="1">
-                <button class="calc-button" name="btn_calc">{{"Paid Amount: R "~(added_products[-1][1])|string}}</button>
+              <th class="calc-btn-cell" colspan="1" title="Calculate Added Items">
+                <button class="btn btn-success" name="btn_calc">
+                  {{"PAID AMOUNT: R "~(added_products[-1][1])|string}}
+                </button>
               </th>
-            </tbody>
-          </table>
-        </form>
-      </div>
+          </div>
+          </tbody>
+        </table>
+      </form>
     </div>
+  </div>
   </body>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <script>
+
   </script>
 {% endblock %}

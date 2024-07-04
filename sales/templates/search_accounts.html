@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block title%}
+        {{cust_info.get('First_Name').title()+" "+cust_info.get('Last_Name', ' ').title()}}
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class="acc_info">
+        <form action="{{ url_for( "Accounts.Accounts", ref_id = cust_info.get('Ref_id') ) }}" method="POST" >
+            {{form.hidden_tag()}}
+            <table class="acc_info_tables">
+                <tbody>
+                    <tr>
+                        <td>Customer #ID:</td>
+                        <td title="Add New Account">
+                            <a href = "{{ url_for( "Accounts.Accounts", ref_id = cust_info.get('Ref_id') ) }}">
+                                <button type="button" class="btn btn-outline-success">
+                                    {{cust_info.get('Ref_id').upper()}}
+                                </button>
+                            </a>
+                        </td>
+                        <td style="text-align: right">Cell No:</td>
+                        <td style="text-align: right">{{cust_info.get('Contact_No')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{cust_info.get('First_Name').title()}}</td>
+                        <td style="text-align: right">Amount Paid:</td>
+                        <td style="text-align: right">R {{total_payments.get('total_paid')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Surname: </td>
+                        <td>{{cust_info.get('Last_Name', ' ').title()}}</td>
+                        <td style="text-align: right">Balance:</td>
+                        <td style="text-align: right">R {{total_payments.get('total_balance')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Amount:</td>
+                        <td>R {{total_payments.get('total_amount')}}</td>
+                        <td colspan="4" style="text-align: right" title="Update Payment">
+                            <a href = "{{ url_for( "Accounts.Payments_Update", ref_id = cust_info.get('Ref_id') ) }}">
+                                <button type="button" class="btn btn-outline-success">
+                                    Take Payment
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class= "delivery">
+        <form action="/delivery/{{cust_info.get('Ref_id')}}" method="POST" >
+            {{form.hidden_tag()}}
+            <table class= "table-acc">
+                <thead>
+                    <tr>
+                        <td style="text-align: left">Del</td>
+                        <td>Delivered</td>
+                        <td>Paid</td>
+                        <td>Type</td>
+                        <td>Qty</td>
+                        <td>Remainder</td>
+                        <td>Delivered</td>
+                        <td>Balance</td>
+                        <td>Date Created</td>
+                        <td>Delivery Date</td>
+                        <td>Last Updated</td>
+                        <td>User</td>
+                        <td style="text-align: right">To Deliver</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <br />
+                    {%for acc in results%}
+                        <tr>
+                            <td style="text-align: left" title="Delete Account">
+                                <a href="/delete_account/{{acc.get('id')}}">
+                                    <button type="button" name="_delivery" class="btn btn-danger">
+                                        X
+                                    </button>
+                                </a>
+                            </td>
+                            <td title="Deliveries History">
+                                <a href="/delivery/delivered/{{acc.get('id')}}">
+                                    <button  type="button" name="_delivery" class="btn btn-outline-success">
+                                        D
+                                    </button>
+                                </a>
+                            </td>
+                            <td title="Payments History">
+                                <a href="/search_payments/{{acc.get('id')}}">
+                                    <button type="button" name="_payment" class="btn btn-outline-primary">
+                                        P
+                                    </button>
+                                </a>
+                            </td>
+                            <td>{{acc.get("Type")}}</td>
+                            <td>{{acc.get("Quantity")}}</td>
+                            <td>{{acc.get("Remainder")}}</td>
+                            <td>{{acc.get("Delivered")}}</td>
+                            {%if acc.get("Payments")[-1].Balance > 0%}
+                                <td style="background: rgb(194, 47, 47)">
+                                    R{{acc.get("Payments")[-1].Balance}}</td>
+                            {%else%}
+                                <td>R{{acc.get("Payments")[-1].Balance}}</td>
+                            {%endif%}
+                            <td>{{(acc.get("Date_Created")|string)[0:10]}}</td>
+                            <td>{{acc.get("Delivery_Schedule")}}</td>
+                            {%if  acc.get("Remainder") == 0 or acc.get('Type') == 'Delivery' %}
+                                <td>{{(acc.get("Date_Updated")|string)[0:10]}}</td>
+                                <td>{{acc.get("User")}}</td>
+                                <td style="text-align: right;">Done 👍</td>
+                            {%else%}
+                                <td>{{(acc.get("Date_Updated")|string)[0:10]}}</td>
+                                <td>{{acc.get("User")}}</td>
+                                <td  style="text-align: right;">
+                                    <input type="number" class="qty" name="Qty" placeholder="Qty">
+                                </td>
+                            {%endif%}
+                        </tr>
+                    {%endfor%}
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            <div class="input-group input-group mb-3">
+                                <input type="date" id="schedule_date" name="form_date" class="form-control" value ={{curr_date}}
+                                required>
+                            </div>
+                        </td>
+                        <td colspan="4" style="text-align: right">
+                            <input type="text" id="driver" name="form_driver" placeholder="Driver's Name" class="form-control"
+                                required>
+                        </td>
+                        <td colspan="3" style="text-align: right" title="Create Delivery Invoice">
+                                <button type="submit" name="Receipt" class="btn btn-outline-success" value='Deliver'>
+                                    Delivery Invoice
+                                </button>
+                        </td>
+                        <td colspan="3" style="text-align: right" title="Create a Receipt">
+                            <button type="submit" name="Receipt"
+                                class="btn btn-outline-warning" value='Generate_Receipt'>
+                                Generate Receipt
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <form action = "/postnotes/{{cust_info.get('Ref_id')}}" method="POST" >
+            {{form.hidden_tag()}}
+            <div class="note">
+                <br />
+                <select name="Status" class="form-select" aria-label="Default select example" required>
+                    <option value="Active">Active</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Owing">Owing</option>
+                    <option value="Pending Issue">Pending Issue</option>
+                  </select>
+                <textarea  name="Note" class="private-note" placeholder="Place your note here" required></textarea>
+                <button type="submit"  name="post_note" class="btn btn-outline-success">
+                    <i class="bi bi-check-circle"></i> POST
+                </button>
+                {%for note in notes%}
+                <ul style= "list-style-type: none">
+                    <li>
+                        <label style="text-align: center; color: #dedede;">
+                            {{'Status  -  '~ note.get("Status")~ '      created by '~ note.get("User")~  ' @'~note.get("Date_Created")}}
+                        </label>
+                        <h2 class = "added-notes" style="background-color: #e7ca0c; color: black;">
+                            {{note.get('Note')}}
+                        </h2>
+                    </li>
+                </ul>
+                {%endfor%}
+            </div>
+        </form>
+    </div>
+    <div id="map">
+
+    </div>
+</div>
+<script>
+    navigator.geolocation.getCurrentPosition(position => {
+        const {latitude, longitude} = position.coords;
+        let url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14319.041084587361!2d28.043711439170334!3d-26.20447558073595"
+        map.innerHTML = <iframe src={url} width="600" height="450" style="border:0;"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+    })
+</script>
+{%endblock%}

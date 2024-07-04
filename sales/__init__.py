@@ -8,12 +8,15 @@ from .blueprints.accounts import account
 from .blueprints.customers import customers
 from .routes import main
 from .forms import Register_form
+#SECRETE_KEYS
 
+SECRET_KEY= "ghsdabbjvslksagy12sagh515d*-fb#"
+WTF_CSRF_SECRET_KEY="ghsdabbjvslksagy12sagh515d*-fb#"
 #Creates Flask app
-app = Flask(__name__) 
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sales_data.db'
 app.config.update(dict(
-    SECRET_KEY="ghsdabbjvslksagy12sagh515d*-fb#", WTF_CSRF_SECRET_KEY="ghsdabbjvslksagy12sagh515d*-fb#"
+    SECRET_KEY= SECRET_KEY, WTF_CSRF_SECRET_KEY= WTF_CSRF_SECRET_KEY
     ))
 @app.context_processor
 def base():
@@ -41,3 +44,4 @@ bcrypt.init_app(app)
 from sales import routes
 """ with app.app_context():
         db.create_all() """
+

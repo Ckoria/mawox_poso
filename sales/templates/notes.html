@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title%}
+    Notes
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class= "active-notes">
+        <table class= "table-acc">
+            <thead>
+                <tr>
+                    <td style="text-align: left">Note Body</td>
+                    <td>Date Created</td>
+                    <td style="text-align: right;">User</td>
+                    <td style="text-align: right">#Customer ID</td>
+                </tr>
+            </thead>
+                {%for note in notes%}
+                    <form  action="{{ url_for( 'Accounts.Search_Accounts', ref_id = note.get('Cust_id'))}}" method="POST" >
+                    <tr>
+                        <td style="text-align: left">
+                            {{note.get('Note')}} 
+                        </td>
+                        <td style="text-align: right;">{{(note.get('Date_Created')|string)[0:10]}}</td>
+                        <td style="text-align: right;">{{note.get('User')}}</td>
+                        <td style="text-align: right">
+                            <a class="btn btn-outline-success"  href="/search_accounts/{{note.get('Cust_id')}}">
+                                {{note.Cust_id}}
+                            </a>
+                        </td>
+                    </tr>
+                    </form>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,138 @@
+<<<<<<< HEAD
+{% extends 'base.html' %}
+{% block title%}
+    Payments 
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class="acc_info">
+        <table class="acc_info_tables">
+            <tbody>
+                <tr>
+                    <td>Payment #ID:</td>
+                    <td>
+                        <a class="btn btn-warning" href="/search_accounts/{{ref_id}}">
+                            {{ref_id}}
+                        </a>
+                    </td>
+                    <td style="text-align: right">Total Amount:</td>
+                    <td style="text-align: right">{{main_acc.get('Amount')}}</td>
+                </tr>
+                <tr>
+                    <td>Trans Type:</td>
+                    <td>{{main_acc.get('Transaction_Type')}}</td>
+                    <td style="text-align: right">Balance:</td>
+                    <td style="text-align: right">R {{main_acc.get('Balance')}}</td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    <td>{{main_acc.get('Status')}}</td>
+                    <td style="text-align: right">Amount Paid:</td>
+                    <td style="text-align: right">R {{main_acc.get('Paid')}}</td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class= "delivery">
+        <table class= "table-acc">
+            <thead>
+                <tr>
+                    <td>#ID</td>
+                    <td>Transaction Type</td>
+                    <td>Balance</td>
+                    <td>Paid</td>
+                    <td>Date Created</td>
+                    <td>User</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for pay in payments%}
+                    <tr>
+                        <td>
+                            <button class="btn btn-outline-dark">
+                                {{pay.get('id')}}
+                            </button>
+                        </td>
+                        <td>{{pay.get("Transaction_Type")}}</td>
+                        <td>{{pay.get("Balance")}}</td>
+                        <td>{{pay.get("Paid")}}</td>
+                        <td>{{pay.get("Date_Created")}}</td>
+                        <td>{{pay.get("User")}}</td>
+                    </tr>           
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+=======
+{% extends 'base.html' %}
+{% block title%}
+    Payments 
+{% endblock %}
+{% block content%}
+<link rel="stylesheet" href="{{url_for("static", filename="css/main.css")}}">
+<div>
+    <div class="acc_info">
+        <table class="acc_info_tables">
+            <tbody>
+                <tr>
+                    <td>Payment #ID:</td>
+                    <td>
+                        <a class="btn btn-warning" href="/search_accounts/{{ref_id}}">
+                            {{ref_id}}
+                        </a>
+                    </td>
+                    <td style="text-align: right">Total Amount:</td>
+                    <td style="text-align: right">{{main_acc.get('Amount')}}</td>
+                </tr>
+                <tr>
+                    <td>Trans Type:</td>
+                    <td>{{main_acc.get('Transaction_Type')}}</td>
+                    <td style="text-align: right">Balance:</td>
+                    <td style="text-align: right">R {{main_acc.get('Balance')}}</td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    <td>{{main_acc.get('Status')}}</td>
+                    <td style="text-align: right">Amount Paid:</td>
+                    <td style="text-align: right">R {{main_acc.get('Paid')}}</td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class= "delivery">
+        <table class= "table-acc">
+            <thead>
+                <tr>
+                    <td>#ID</td>
+                    <td>Transaction Type</td>
+                    <td>Balance</td>
+                    <td>Paid</td>
+                    <td>Date Created</td>
+                    <td>User</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for pay in payments%}
+                    <tr>
+                        <td>
+                            <button class="btn btn-outline-dark">
+                                {{pay.get('id')}}
+                            </button>
+                        </td>
+                        <td>{{pay.get("Transaction_Type")}}</td>
+                        <td>{{pay.get("Balance")}}</td>
+                        <td>{{pay.get("Paid")}}</td>
+                        <td>{{pay.get("Date_Created")}}</td>
+                        <td>{{pay.get("User")}}</td>
+                    </tr>           
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+>>>>>>> refs/remotes/origin/master
+{%endblock%}

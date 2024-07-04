@@ -1,177 +1,125 @@
 {% extends 'base.html' %}
 {% block title%}
-  MaWoX Home
+  Edit Customer Details
 {% endblock %}
 {% block content%}
-	<!-- Font-->
-	<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/montserrat-font.css")}}" />
-	<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css")}}" />
-	<!-- Main Style Css -->
-    <link rel="stylesheet" href="{{url_for("static", filename="css/style.css")}}" />
-	<body class="form-v10">
-		<div class="page-content">
-			<div class="form-v10-content">
-				<form class="form-detail" action="/customers/{{id}}" method="POST" id="myform">
-					{{login_form.csrf_token}}
-					<div class="form-left">
-						<h2 class="form-title">Customers Details</h2>
-						<h3 class="font-effect-3d-float" id="font-effect-3d">
-							MaWoX Biz Hub
-						</h3>
-						<br />
-						{%if id > 0 %}
-							<div class="form-row">
-								<select name="title">
-									<option class="option" value="title">Title</option>
-									<option class="option" value="Mr">Mr</option>
-									<option class="option" value="Mrs">Mrs</option>
-									<option class="option" value="Miss">Miss</option>
-									<option class="option" value="Dr">Dr</option>
-									<option class="option" value="Prof">Prof</option>
+<!-- Font-->
+<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/montserrat-font.css")}}" />
+<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css")}}" />
+<!-- Main Style Css -->
+<link rel="stylesheet" href="{{url_for("static", filename="css/style.css")}}" />
+<body class="form-v10">
+	<div class="page-content">
+		<div class="form-v10-content">
+			<form class="form-detail" action="/customers/{{ref_id}}" method="POST" id="myform">
+				{{login_form.csrf_token}}
+				<div class="form-left">
+					<br /><br /><br />
+					<h3 class="font-effect-3d-float" id="font-effect-3d">
+						MaWoX Biz Hub
+					</h3>
+					<br />
+					{%if mode == "edit" %}
+
+						{% set fname = customer_details.get('First_Name')  %}
+						{% set lname = customer_details.get('Last_Name')  %}
+						{% set stAddress = customer_details.get('Street_Address')  %}
+						{% set area = customer_details.get('Area')  %}
+						{% set country = customer_details.get('Country')  %}
+						{% set cNo = customer_details.get('Contact_No')  %}
+						{% set tel = customer_details.get('Tel_No')  %}
+						{% set email = customer_details.get('Email_Address')  %}
+						{% set save_btn = "UPDATE" %}
+					{%else%}
+						{% set title = "title" %}
+						{% set fname ="" %}
+						{% set lname = "" %}
+						{% set stAddress ="" %}
+						{% set area = "" %}
+						{% set country = "" %}
+						{% set cNo = "" %}
+						{% set tel = "" %}
+						{% set email ="imeyili@mail.com" %}
+						{% set save_btn = "SAVE" %}
+					{%endif%}
+					<div class="form-row-last">
+						<div class="form-row">
+							<select name="title" value={{title}}>
+								<option class="option" value="Mr">Mr</option>
+								<option class="option" value="Mrs">Mrs</option>
+								<option class="option" value="Miss">Miss</option>
+								<option class="option" value="Dr">Dr</option>
+								<option class="option" value="Prof">Prof</option>
+							</select>
+							<span class="select-btn">
+								<i class="zmdi zmdi-chevron-down"></i>
+							</span>
+						</div>
+						<div class="form-group">
+							<div class="form-row form-row-1">
+								<input type="text" name="First_Name" id="first_name" class="input-text"
+								placeholder= "Igama" required value={{fname}} >
+							</div>
+							<div class="form-row form-row-2">
+								<input type="text" name="Last_Name" id="last_name" class="input-text"
+								placeholder= "Isibongo" required value={{lname}} >
+							</div>
+						</div>
+						<div class="form-row">
+							<input type="text" name="Street_Address" class="street" id="street"
+							placeholder= "Umgwaqo" required value={{stAddress}} >
+						</div>
+						<div class="form-group">
+							<div class="form-row form-row-1">
+								<input type="text" name="Area" class="zip" id="zip"
+								placeholder= "Indawo" required value={{area}} >
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-row form-row-2">
+								<input type="text" name="Contact_No" class="phone" id="phone" placeholder= "Inombolo 1" required
+								min="0000000000" and max="9999999999" pattern= "[0][0-9]{9}" value={{cNo}} >
+							</div>
+							<div class="form-row form-row-2">
+								<input type="text" name="Tel_No" class="alt-phone" id="alt_phone" placeholder= "Inombolo 2" required
+								min="0000000000" and max="9999999999" pattern= "[0][0-9]{9}" value={{tel}}>
+							</div>
+						</div>
+						<div class="form-row form-row-2">
+							<input type="text" name="Email_Address" id="your_email" class="input-text"
+							placeholder= "imeyili@mail.com" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" value={{email}}>
+						</div>
+						<div class="form-group">
+							<div class="form-row form-row-2">
+								<select name="Country" class="select-box">
+									<option value="South Africa">South Africa</option>
 								</select>
 								<span class="select-btn">
 									<i class="zmdi zmdi-chevron-down"></i>
 								</span>
 							</div>
-							<div class="form-group">
-								<div class="form-row form-row-1">
-									<input type="text" name="first_name" id="first_name" class="input-text" value={{customer_details.fname}} required>
-								</div>
-								<div class="form-row form-row-2">
-									<input type="text" name="last_name" id="last_name" class="input-text" value={{customer_details.lname}} required>
-								</div>
-							</div>
-							<div class="form-right">
-								<h2>Update Customer Details</h2>
-								<div class="form-row">
-									<input type="text" name="street" class="street" id="street" value={{customer_details.stAddress}} required>
-								</div>
-								<div class="form-group">
-									<div class="form-row form-row-1">
-										<input type="text" name="zip" class="zip" id="zip" value={{customer_details.area}} required>
-									</div>
-									<div class="form-row form-row-2">
-										<select name="place">
-											<option value="Cato Ridge">Cato Ridge</option>
-											<option value="PMB">PMB</option>
-											<option value="Pinetown">Pinetown</option>
-											<option value="Durban">Durban</option>
-										</select>
-										<span class="select-btn">
-											<i class="zmdi zmdi-chevron-down"></i>
-										</span>
-									</div>
-								</div>
-								<div class="form-row">
-									<select name="country">
-										<option value="country">Country</option>
-										<option value="South Africa">South Africa</option>
-									
-									</select>
-									<span class="select-btn">
-										<i class="zmdi zmdi-chevron-down"></i>
-									</span>
-								</div>
-								<div class="form-group">
-									<div class="form-row form-row-1">
-										<input type="text" name="code" class="code" id="code" placeholder="+27">
-									</div>
-									<div class="form-row form-row-2">
-										<input type="text" name="phone" class="phone" id="phone" value={{customer_details.cNo}} required>
-									</div>
-									<div class="form-row form-row-2">
-										<input type="text" name="alt-phone" class="alt_phone" id="alt_phone" value={{customer_details.tel}} required>
-									</div>
-								</div>
-								<div class="form-row">
-									<input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" value={{customer_details.email}}>
-								</div>
-								<div class="form-row-last">
-									<button type="submit" name="addNew" class="register" value="Save"><i class="fa-thin fa-floppy-disk">Save</i></button>
-								</div>
-							</div>
-						{%else%}
-							<div class="form-row">
-								<select name="title">
-									<option class="option" value="title">Title</option>
-									<option class="option" value="Mr">Mr</option>
-									<option class="option" value="Mrs">Mrs</option>
-									<option class="option" value="Miss">Miss</option>
-									<option class="option" value="Dr">Dr</option>
-									<option class="option" value="Prof">Prof</option>
+							<div class="form-row form-row-2">
+								<select name="City" class="select-box">
+									<option value="Cato Ridge">Cato Ridge</option>
+									<option value="PMB">PMB</option>
+									<option value="Pinetown">Pinetown</option>
+									<option value="Durban">Durban</option>
 								</select>
 								<span class="select-btn">
 									<i class="zmdi zmdi-chevron-down"></i>
 								</span>
 							</div>
-							<div class="form-group">
-								<div class="form-row form-row-1">
-									<input type="text" name="first_name" id="first_name" class="input-text" placeholder="First Name" required>
-								</div>
-								<div class="form-row form-row-2">
-									<input type="text" name="last_name" id="last_name" class="input-text" placeholder="Last Name" required>
-								</div>
-							</div>
-							<div class="form-right">
-								<h2>Customer's Contact Details</h2>
-								<div class="form-row">
-									<input type="text" name="street" class="street" id="street" placeholder="Street Name" required>
-								</div>
-								<div class="form-group">
-									<div class="form-row form-row-1">
-										<input type="text" name="zip" class="zip" id="zip" placeholder="Area" required>
-									</div>
-									<div class="form-row form-row-2">
-										<select name="place">
-											<option value="Cato Ridge">Cato Ridge</option>
-											<option value="PMB">PMB</option>
-											<option value="Pinetown">Pinetown</option>
-											<option value="Durban">Durban</option>
-										</select>
-										<span class="select-btn">
-											<i class="zmdi zmdi-chevron-down"></i>
-										</span>
-									</div>
-								</div>
-								<div class="form-row">
-									<select name="country">
-										<option value="country">Country</option>
-										<option value="South Africa">South Africa</option>
-									
-									</select>
-									<span class="select-btn">
-										<i class="zmdi zmdi-chevron-down"></i>
-									</span>
-								</div>
-								<div class="form-group">
-									<div class="form-row form-row-1">
-										<input type="text" name="code" class="code" id="code" placeholder="+27">
-									</div>
-									<div class="form-row form-row-2">
-										<input type="text" name="phone" class="phone" id="phone" placeholder="Cell Number" required>
-									</div>
-									<div class="form-row form-row-2">
-										<input type="text" name="alt-phone" class="alt_phone" id="alt_phone" placeholder="Enye iNumber" required>
-									</div>
-								</div>
-								<div class="form-row">
-									<input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Email Address">
-								</div>
-								<div class="form-checkbox">
-									<label class="container"><p>I do accept the <a href="#" class="text">personal data privacy</a> policy.</p>
-										<input type="checkbox" name="checkbox" required>
-										<span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="form-row-last">
-									<button type="submit" name="addNew" class="register" value="Add Customer"><i class="fa-thin fa-floppy-disk">Add</i></button>
-								</div>
-							</div>	
-						{%endif%}
+						</div>
+						<div class="form-row-last">
+							<button type="submit" name="addNew" class="btn btn-dark" value={{save_btn}}>
+								{{save_btn}}
+							</button>
+						</div>
 					</div>
-				</form>
-			</div>
-		</div>	
-	</body>
-	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 {%endblock%}

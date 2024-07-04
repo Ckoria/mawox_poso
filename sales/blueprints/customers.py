@@ -1,68 +1,63 @@
+
 #Python Modules
 from flask_login import login_required, current_user
 from datetime import datetime
+from sqlalchemy import desc
 from flask import render_template, redirect, url_for, flash, request, Blueprint
 from sqlalchemy.exc import IntegrityError
 #Own Modules
-from ..process import Get_Customers 
+from ..process import *
 from ..exts import db
 from ..models.models import Customers_database
 from ..forms import Login_form
 
-customers = Blueprint('Customers', __name__)
 
-#Adds Customer details to Accounts page
-@customers.route('/customers/<int:id>', methods=['GET', 'POST'])
+customers = Blueprint('Customers', __name__)
+@customers.route('/customers/<ref_id>', methods=['GET', 'POST'])
 @login_required
-def Add_Customer(id):
-    #Avoid adding existing number error
+def Add_Customer(ref_id):
     try:
-        print(id, "Add Customers")
-        if request.form.get("addNew") == "Add Customer":
-            #Save customer details to database
-            db_customers= Customers_database(
-                        title= request.form.get("title"), First_Name= request.form.get("first_name"),
-                        Last_Name= request.form.get("last_name"), Contact_No= request.form.get("phone"),
-                        Tel_No= request.form.get("alt-phone"), Email_Address= request.form.get("your_email"),
-                        Street_Address= request.form.get("street"), Area= request.form.get("zip"),
-                        City= request.form.get("place"), Country= request.form.get("country"),
-                        User= current_user.username.title()
-                        )
-            db.session.add(db_customers)
-            db.session.commit()
-            flash(f'{db_customers.First_Name} has been successfully ADDED to our database!', category='success')
-            db_customers=Customers_database.query.filter_by(Contact_No=db_customers.Contact_No).first()
-            return redirect(url_for('Accounts.Accounts', id= db_customers.id))
-        else: 
-            #adding a new account from existing customer
-            customer_details= Get_Customers(id)
-            return redirect(url_for('Accounts.Accounts', id= id))       
-    except IntegrityError:
-        customer_details= Get_Customers(id)
-        flash (f"This number {request.form.get('phone')} already exist. Please search for existing customer",
+        form_details = dict(request.form)
+        form_details['User'] = current_user.username.title()
+        form_details.pop('csrf_token')
+        if  form_details.get("addNew") == "SAVE":
+            del form_details["addNew"]
+            last_db_row = Customers()
+            form_details["Ref_id"] = form_details.get("First_Name")[0].upper() + form_details.get("Last_Name")[0].upper() + str(last_db_row.id + 1)
+            if Search(form_details.get("Contact_No")).get('customers') != []:
+                flash(f'{form_details.get("Contact_No")} already exist, please search customer with the number!',
+                category='danger')
+                return redirect(url_for('Customers.New_Customer'))
+            else:
+                Save_Customer(form_details)
+                ref_id = form_details.get("Ref_id")
+                flash(f'{Get_Customer_ByRef_Id(ref_id).First_Name.title()} has been successfully ADDED to our database!',
+                        category='success')
+                return redirect(url_for('Accounts.Accounts', ref_id= ref_id))
+            #new_customer_details(form_details)
+        elif form_details.get("addNew") == "UPDATE":
+            del form_details["addNew"]
+            Update_Customer(form_details, ref_id)
+            flash(f'{form_details.get("First_Name").title()} has been successfully UPDATED to our database!',
+                    category='success')
+            return redirect(url_for('Accounts.Accounts', ref_id= ref_id))
+    except IntegrityError as Err:
+        flash(f"Error: {Err} This number {form_details.get('Contact_No')} already exist. Please search for existing customer",
                category="danger")
-        return render_template("customer.html", login_form= Login_form(), id=id, customer_details= customer_details )    
-#Adds Customer details to Accounts page
-@customers.route('/modify_customer/<int:id>', methods=['GET', 'POST'])
+        return redirect(url_for("Customers.New_Customer"))
+
+
+# Adds Customer details to Accounts page
+@customers.route('/modify_customer/<ref_id>', methods=['GET', 'POST'])
 @login_required
-def Edit_Customer(id):
-    print("Customer")
-    if request.form.get("addNew") == "Save":
-        customer_details= Get_Customers(id)
-        #Save customer details to database
-        update_customer= Customers_database.query.get_or_404(id)
-        update_customer.First_Name, update_customer.Last_Name = request.form.get("first_name"), request.form.get("last_name")
-        update_customer.Contact_No, update_customer.Tel_No= request.form.get("phone"), request.form.get("alt-phone")
-        update_customer.title, update_customer.Email_Address= request.form.get("title"), request.form.get("your_email")
-        update_customer.User= current_user.username.title()
-        update_customer.Street_Address, update_customer.Area= request.form.get("street"), request.form.get("zip")
-        update_customer.City, update_customer.Country= request.form.get("place"), request.form.get("country"),
-        db.session.commit()
-        flash(f'{update_customer.First_Name} has been successfully UPDATED to our database!', category='success')
-        return redirect(url_for('main.home', id=id))
+def Edit_Customer(ref_id):
+    return render_template("customer.html", login_form= Login_form(),
+                           customer_details= Get_Customers(ref_id), ref_id= ref_id, mode= "edit")
+
+
 #Go to Customer form to create a new customer
 @customers.route('/new_customer', methods=['GET', 'POST'])
 @login_required
 def New_Customer():
-    id= 0
-    return render_template("customer.html", login_form= Login_form(), id= id)  
+    return render_template("customer.html", login_form= Login_form(),
+                           ref_id= Customers_database.query.count(), mode="save")

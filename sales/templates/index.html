@@ -1,16 +1,110 @@
 {% extends 'base.html' %}
 {% block title%}
-  MaWoX Home
+  Dayisa Portal
 {% endblock %}
 {% block content%}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="{{url_for("static", filename="css/dash.css")}}">
-<body>
-    <div class= "container">
-        <div class="dash_btns">
-            
-        </div>
+<link rel="stylesheet" href="{{url_for("static", filename="css/index.css")}}">
+<div class= "dash-container">
+  <div class= "grid-structure">
+    <!-- STATS AND NUMBERS -->
+    <div class= "box-container">
+      <div class= "box" title="Recently Added Customers">
+        <a href="{{url_for('Accounts.Recent_Customers')}}" >
+          <div>
+            <h5>
+                <i class="bi bi-people-fill"></i> Customers
+            </h5>
+          </div>
+          <div>
+            <button class="btn btn-outline-primary">
+                <h3>
+                    {{counts.get('no_of_customers')| length}}
+                </h3>
+            </button>
+          </div>
+        </a>
+      </div>
+      <div class= "box" title="Active Accounts (Either owing or owed)">
+        <a href="{{url_for('Accounts.Active_Customers_Route')}}" >
+          <div>
+            <h5>
+                <i class="bi bi-card-checklist"></i> Accounts
+            </h5>
+          </div>
+          <div>
+            <button class="btn btn-outline-success">
+                <h3>
+                    {{counts.get('no_of_accounts')}}
+                </h3>
+            </button>
+          </div>
+        </a>
+      </div>
+      <div class= "box" title="Delivery Schedule">
+        <form method="post" action="{{url_for('Accounts.Scheduled_Accounts')}}">
+          {{form.hidden_tag()}}
+          <div class="input-group input-group mb-3" style="text-align: right">
+            <input type="date" id="schedule_date" name="selected_date" class="form-control" value ={{curr_date}}
+            required>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-outline-warning">
+              <h4>
+                {{counts.get('scheduled')}}
+              </h4>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class= "box"  title="Uncollected Balances">
+        <a href="https://docs.google.com/spreadsheets/d/1lpGUjsUdEklFV_c58lVvko3Ak2QNWQB-ozzkZYL4L4k/edit#gid=1982460193" >
+          <div>
+            <h5>
+                <i class="bi bi-people-fill"></i>Balances
+            </h5>
+          </div>
+          <div>
+            <button class="btn btn-outline-danger">
+                <h3>
+                    R  {{counts.get('Unrecovered_Balances')}}
+                </h3>
+          </div>
+        </a>
+      </div>
     </div>
-    <script src="{{ url_for('static', filename='scripts/search.js') }}"></script>
-</body>
+    <!-- GRAPHS AND CHARTS -->
+    <div class="chart-container">
+      <div class= "chart" >
+        <section class= "chart-sales">
+
+        </section>
+      </div>
+      <div class= "chart" >
+        <section class="chart-xpenses" >
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script >
+  const moveOutEffect = document.querySelector(".grid-structure");
+  moveOutEffect.onmouseover = moveOut;
+  function moveOut(){
+      moveOutEffect.style.transition = "all 2s ease-out";
+      moveOutEffect.style.backgroundColor = "ffff";
+  };
+</script>
+<!-- DASHBOARD SUMMARY -->
+<script>
+
+  let past_months = ({{sales_qty.get('months') | tojson}}).reverse();
+  let recent_accounts = ({{sales_qty.get('recent_accounts') | tojson}}).reverse();
+  let list_of_items = ({{sales_qty.get('products') | tojson}});
+  let qty = ({{sales_qty.get('results') | tojson}}).reverse();
+
+</script>
+<script src="{{url_for('static', filename='scripts/index.js')}}"></script>
 {% endblock %}

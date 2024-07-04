@@ -8,13 +8,12 @@
   <div class="container">
     <form method="POST" class= form-login style="color: white">
           <div class="checkbox mb-3">
-            <h6>Need an account</h6>
-            <a class="btn btn-sm btn-secondary" href="{{url_for('main.register_page')}}">Sign Up</a>
+            <h6>Need an account? Login as Admin</h6>
           </div>
           {{form.csrf_token }}
           {{form.username.label()}}
           {{form.username(class= "form-control ", placeholder= "Username")}}
-          
+
           {{form.pwd_1.label()}}
           {{form.pwd_1(class= "form-control ", placeholder= "Password")}}
           </br>
