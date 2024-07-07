@@ -335,15 +335,8 @@ def Xpenses():
 def Notes():
     notes = []
     notes_info = all_notes()
-    old_date = datetime.now()
     for note in notes_info:
         tmp_notes = Get_Notes(note.Cust_id).get('notes')[0] # Most recent note per customer
-        nold_date = datetime.now()
         if tmp_notes.get('Status') != 'Resolved':
-            # names = Search_Acc(note.Cust_id).get('customer_info')
-            # tmp_notes['fname'] = names['First_Name']
-            # tmp_notes['lname'] = names.get('Last_Name', '')
             notes.append(tmp_notes)
-            print(datetime.now() - nold_date)
-    print(datetime.now() - old_date)
     return render_template("notes.html", form= Login_form(), notes= notes)

@@ -1,13 +1,14 @@
 import pygsheets
 import pandas as pd
-import requests
+import requests, os, sys
 from flask import redirect, url_for, flash
 from pathlib import Path
 from sales.models.models import *
 from datetime import date, datetime, timedelta
-import time
+from download_creds import download_file_from_google_drive
 from .dash_data import remaining_items
 from sales.process import *
+from dotenv import load_dotenv
 
 """
     This module is responsible for taking data from the database
@@ -19,9 +20,18 @@ def gsheet_auth() -> None:
     """
         Authentication for Google Sheets
     """
-    current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
-    serv = str(current_dir) + '\service_account.json'
+    #current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+    load_dotenv()
+    if("win" in sys.platform):
+        service_file = "\\" + os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    else:
+        service_file = "/pos/" + os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        
+    current_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in locals() else os.getcwd()
+    serv = current_dir + service_file
+    download_file_from_google_drive(os.getenv("SERVICE_ACC_CREDS"),  serv)
     s_account = pygsheets.authorize(service_account_file= serv)
+    os.remove(serv)
     return s_account.open("Products")
 
 
