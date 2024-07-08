@@ -6,7 +6,8 @@ from download_creds import download_file_from_google_drive
 
 current_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in locals() else os.getcwd()
 url = f"https://drive.google.com/file/d/1_f_v7c133PzVKCG6SDsyVYYrFqCNZ6uc/view?usp=sharing"
-download_file_from_google_drive(url, current_dir +"\.env")
+
+download_file_from_google_drive(url, current_dir.split("sales")[0]+".env")
 
 # ----------------------------------------------------- APP STARTS HERE -------------------------------------------------
 

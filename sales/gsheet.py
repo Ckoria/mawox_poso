@@ -25,7 +25,7 @@ def gsheet_auth() -> None:
     if("win" in sys.platform):
         service_file = "\\" + os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
     else:
-        service_file = "/pos/" + os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        service_file = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
         
     current_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in locals() else os.getcwd()
     serv = current_dir + service_file
