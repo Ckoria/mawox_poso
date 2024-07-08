@@ -1,10 +1,19 @@
+
+from dotenv import load_dotenv
+import os
+import base64
+from download_creds import download_file_from_google_drive
+
+current_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in locals() else os.getcwd()
+url = f"https://drive.google.com/file/d/1_f_v7c133PzVKCG6SDsyVYYrFqCNZ6uc/view?usp=sharing"
+download_file_from_google_drive(url, current_dir +"\.env")
+
+# ----------------------------------------------------- APP STARTS HERE -------------------------------------------------
+
 #Python Modules
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
-from dotenv import load_dotenv
-import os
 #Own Modules
-
 from .extensions import db, login_manager, bcrypt
 from .blueprints.dashboard import dash
 from .blueprints.accounts import account
@@ -12,8 +21,6 @@ from .blueprints.customers import customers
 from .routes import main
 from .forms import Register_form
 
-import os
-import base64
 
 def generate_random_base64_key(length=32):
     return base64.urlsafe_b64encode(os.urandom(length)).decode('utf-8').rstrip('=')

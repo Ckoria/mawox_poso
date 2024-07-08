@@ -268,11 +268,12 @@ def record_xpenses():
 
 def saveToPDF():
     # 
-    web_app_url = "https://script.google.com/macros/s/AKfycbwm-7uRqTZiafO70-VVuGVgYhfzOk8md2f0nyQegFgaGS6Ef2v0HXxlylGNa6W2_6XCrA/exec"
+    web_app_url = os.getenv("WEB_URL")
 
     response = requests.get(web_app_url)
 
     if response.status_code == 200:
+        print(response.content)
         flash("Successfully saved to Google Drive")
     else:
         flash("Failed to save the recept! ")

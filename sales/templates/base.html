@@ -95,72 +95,74 @@
          {%endif%}
       {%endwith%}
       <div class="main-container">
-         <aside class="grid-sidebar">
-            <div class="sidebar-container">
-               <ul>
-                  <div id="side-widget">
-                     <li>
-                        <a href="{{url_for('dashboard.dashboard')}}" >
-                           <i class="bi bi-speedometer" title="Dashboard"></i>
-                        </a>
-                     </li>
-                  </div>
-                  <div id="side-widget">
-                     <li>
-                        <a href="{{url_for('Accounts.Search_Customer')}}" >
-                           <i class="bi bi-people-fill" title="Customers"></i>
-                        </a>
-                     </li>
-                  </div>
-                  <div id="side-widget">
-                     <li>
-                        <a href="{{url_for('Accounts.Notes')}}" >
-                           <i class="bi bi-card-checklist" title="Notes"></i>
-                        </a>
-                     </li>
-                  </div>
-                  <div id="side-widget">
-                     <li>
-                        <a href="{{url_for('Accounts.Xpenses')}}" >
-                           <i class="bi bi-cash-coin" title="Expenses"></i>
-                        </a>
-                     </li>
-                  </div>
-                  <div id="side-widget">
-                     <li>
-                        <a href="https://drive.google.com/drive/folders/1GBBJcoeDPFLaxYCrMw26-erhRjic1327?usp=sharing" target=”_blank”>
-                           <i class="bi bi-camera-reels" title="Tutorials"></i>
-                        </a>
-                     </li>
-                  </div>
-                  <div id="side-widget">
-                     <li>
-                        <a href="https://docs.google.com/spreadsheets/d/1lpGUjsUdEklFV_c58lVvko3Ak2QNWQB-ozzkZYL4L4k/edit?pli=1#gid=1488247037" target=”_blank”>
-                           <i class="bi bi-file-earmark-spreadsheet" title="Spreadsheet"></i>
-                        </a>
-                     </li>
-                  </div>
-                  {%if current_user.username== "Admin" or current_user.username== "nathi" %}
-                  <div id="side-widget">
-                     <li>
-                        <a  href="https://docs.google.com/spreadsheets/d/1_l9PMvL1UcXIvG2CxpiBq2zln9gIwnyB_0gGhf4PIYM/edit?usp=sharing" target=”_blank”>
-                           <i class="bi bi-file-earmark-excel" title="Payroll"></i>
-                        </a>
-                     </li>
-                  </div>
-                  {%endif%}
-                  {%if current_user.username== "Admin" or current_user.username== "Philile" %}
-                  <div id="side-widget">
-                     <li>
-                        <a href="{{url_for('main.register_page')}}">
-                           <i class="bi bi-person-add" title="Register"></i>
-                        </a>
-                     </li>
-                  </div>
-                  {%endif%}
-               </ul>
-            </div>
-         </aside>
+         {%if current_user.is_authenticated%}
+            <aside class="grid-sidebar">
+               <div class="sidebar-container">
+                  <ul>
+                     <div id="side-widget">
+                        <li>
+                           <a href="{{url_for('dashboard.dashboard')}}" >
+                              <i class="bi bi-speedometer" title="Dashboard"></i>
+                           </a>
+                        </li>
+                     </div>
+                     <div id="side-widget">
+                        <li>
+                           <a href="{{url_for('Accounts.Search_Customer')}}" >
+                              <i class="bi bi-people-fill" title="Customers"></i>
+                           </a>
+                        </li>
+                     </div>
+                     <div id="side-widget">
+                        <li>
+                           <a href="{{url_for('Accounts.Notes')}}" >
+                              <i class="bi bi-card-checklist" title="Notes"></i>
+                           </a>
+                        </li>
+                     </div>
+                     <div id="side-widget">
+                        <li>
+                           <a href="{{url_for('Accounts.Xpenses')}}" >
+                              <i class="bi bi-cash-coin" title="Expenses"></i>
+                           </a>
+                        </li>
+                     </div>
+                     <div id="side-widget">
+                        <li>
+                           <a href="https://drive.google.com/drive/folders/1Gh2H5cboaxeGPzShlXb95oLHvCtpBoDM?usp=sharing" target=”_blank”>
+                              <i class="bi bi-sd-card"  title="Storage"></i>
+                           </a>
+                        </li>
+                     </div>
+                     <div id="side-widget">
+                        <li>
+                           <a href="https://docs.google.com/spreadsheets/d/1lpGUjsUdEklFV_c58lVvko3Ak2QNWQB-ozzkZYL4L4k/edit?pli=1#gid=1488247037" target=”_blank”>
+                              <i class="bi bi-file-earmark-spreadsheet" title="Spreadsheet"></i>
+                           </a>
+                        </li>
+                     </div>
+                     {%if current_user.username== "Admin" or current_user.username== "nathi" %}
+                     <div id="side-widget">
+                        <li>
+                           <a  href="https://docs.google.com/spreadsheets/d/1_l9PMvL1UcXIvG2CxpiBq2zln9gIwnyB_0gGhf4PIYM/edit?usp=sharing" target=”_blank”>
+                              <i class="bi bi-file-earmark-excel" title="Payroll"></i>
+                           </a>
+                        </li>
+                     </div>
+                     {%endif%}
+                     {%if current_user.username== "Admin" or current_user.username== "Philile" %}
+                     <div id="side-widget">
+                        <li>
+                           <a href="{{url_for('main.register_page')}}">
+                              <i class="bi bi-person-add" title="Register"></i>
+                           </a>
+                        </li>
+                     </div>
+                     {%endif%}
+                  </ul>
+               </div>
+            </aside>
+         {%endif%}
          <div class="main-logo">
             <img class= "logo" src="{{url_for("static", filename="images/logo.png")}}"/>
             {% block content%}
@@ -168,6 +170,9 @@
             {% endblock %}
          </div>
       </div>
+      
+
+
       <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/base.css")}}" />
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src='https://kit.fontawesome.com/a076d05399.js'></script>
